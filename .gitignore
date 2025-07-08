@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+
+# Virtual env
+.venv/
+
+# fodlers
+results/
+weights/
+runs/
+
+# Dataset
+*.csv
+*.json
