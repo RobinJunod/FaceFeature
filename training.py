@@ -44,6 +44,7 @@ def masked_huberloss(pred, target, mask, delta=1.0/9.0, reduction="mean"):
 
 CSV_PATH = "/kaggle/input/facialfeat-extracted/training.csv"  # adjust if needed
 CKPT_IN = "/kaggle/input/keyppointnetm/pytorch/default/1/KeypointNetM_epoch300.pth" # if you want to resume training
+OUTPUT_DIR = "/kaggle/working"  # where to save checkpoints
 
 EPOCHS    = 300
 SAVE_EVERY = 20
@@ -71,7 +72,8 @@ if __name__ == "__main__":
         model = ViTFaceKeypoint().to(device)
     elif MODE == 'cnn_adv':
         model = KeypointNetM().to(device)
-
+    model_name = model.__class__.__name__
+    
     # optional: resume from a checkpoint in /kaggle/input/
     if os.path.exists(CKPT_IN):
         model.load_state_dict(torch.load(CKPT_IN, map_location=device))
@@ -116,5 +118,8 @@ if __name__ == "__main__":
 
         # -------- save checkpoint --------
         if epoch % SAVE_EVERY == 0 or epoch == EPOCHS:
-            torch.save(model.state_dict(),f"/kaggle/working/KeypointNetM_epoch{epoch}.pth") # Change to your desired path
+            
+            outpath = os.path.join(OUTPUT_DIR, f"{model_name}_epoch{epoch}.pth")
+            
+            torch.save(model.state_dict(),outpath) # Change to your desired path
             print(f"Saved checkpoint for epoch {epoch}.")

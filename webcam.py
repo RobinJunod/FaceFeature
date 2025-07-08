@@ -1,8 +1,13 @@
 # %%
 import cv2, torch, numpy as np
 from model import KeypointNet, KeypointNet2, ViTFaceKeypoint, KeypointNet3, KeypointNetM
-import torch.nn as nn
+import time, numpy as np, cv2, torch
 
+
+
+MODE = 'vit'
+DISPLAY_EDGE = 400      # output height (and width) of *each* panel in pixels
+POINT_R = 2             # landmark circle radius
 
 # ──────────────────────────── helpers ────────────────────────────
 def center_crop_square(img):
@@ -24,11 +29,11 @@ def preprocess(img_square):
 # ──────────────────────────── init ───────────────────────────────
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-model = 'vit' # Choose the model
-if model == 'cnn':
+
+if MODE == 'cnn':
     model = KeypointNet().to(device)
     model.load_state_dict(torch.load('weights\cnn_keypointnet2_epoch100.pth', map_location=device))
-elif model == 'vit':
+elif MODE == 'vit':
     # model = ViTFaceKeypoint().to(device)
     # model.load_state_dict(torch.load('weights\\ViTFaceKeypoint_epoch300.pth', map_location=device))
     # model = KeypointNet3().to(device)
@@ -41,11 +46,8 @@ cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     raise SystemExit("Could not open webcam.")
 
-import time, numpy as np, cv2, torch
 # … (all your imports, helper funcs, model loading, VideoCapture …)
 
-DISPLAY_EDGE = 400      # output height (and width) of *each* panel in pixels
-POINT_R = 2             # landmark circle radius
 
 # ──────────────────────────── main loop ──────────────────────────
 t0 = time.perf_counter()
