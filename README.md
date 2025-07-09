@@ -22,8 +22,6 @@
 5. [Model Architecture](#model-architecture)
 6. [Evaluation & Benchmarks](#evaluation--benchmarks)
 7. [Troubleshooting](#troubleshooting)
-8. [Contributing](#contributing)
-9. [License](#license)
 
 ---
 
