@@ -6,6 +6,8 @@ __pycache__/
 
 # fodlers
 runs/
+checkpoints/
+logs/
 
 # Dataset
 *.csv
