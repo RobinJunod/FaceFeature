@@ -69,7 +69,7 @@ python training.py \
 
 ## Dataset
 
-The project uses the **[Kaggle Facial Keypoints Detection](https://www.kaggle.com/competitions/facial-keypoints-detection)** CSV (96 × 96 grayscale faces, centered and frontal). Because the faces are clean and aligned, a naïve *predict‑the‑mean* model already scores surprisingly well. To generalise beyond this toy setting we **augment each sample \~50× at train‑time**:
+The project uses the **[Kaggle Facial Keypoints Detection](https://www.kaggle.com/competitions/facial-keypoints-detection)** CSV (96 × 96 grayscale faces, centered and frontal) or 'kaggle competitions download -c facial-keypoints-detection'. Because the faces are clean and aligned, a naïve *predict‑the‑mean* model already scores surprisingly well. To generalise beyond this toy setting we **augment each sample \~50× at train‑time**:
 
 <div align="center">
 <img src="results/baseline.png" width="45%" alt="Original face"/>
